@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class PersonController {
         method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person finById(@PathVariable("id") String id){
+    public Person finById(@PathVariable("id") Long id){
         return service.findById(id);
     }
     @RequestMapping(method = RequestMethod.GET,
@@ -31,6 +32,10 @@ public class PersonController {
     }
     @RequestMapping(
             method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -51,7 +56,7 @@ public class PersonController {
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
-    public void delete(@PathVariable ("id") String id){
+    public void delete(@PathVariable ("id") Long id){
         service.delete(id);
     }
 
